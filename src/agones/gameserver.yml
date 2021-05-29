@@ -1,0 +1,19 @@
+apiVersion: "agones.dev/v1"
+kind: GameServer
+metadata:
+  name: "pacman-server"
+spec:
+  health:
+    disabled: true
+  ports:
+  - name: default
+    portPolicy: Dynamic
+    containerPort: 8081
+    protocol: TCP
+  template:
+    spec: 
+      serviceAccountName: default
+      containers:
+      - name: pacman-show
+        image: sebi2706/pacman-show:agones
+
