@@ -1,3 +1,18 @@
+# Quickstart Deploy Pacman and agregator as Knative service 
+
+Make sure you have `Strimzi` and `knative` operators installed on your cluster.
+
+```
+kubectl apply -f https://strimzi.io/examples/latest/kafka/kafka-ephemeral.yaml -n kafka
+
+kn service create pacman-show --image sebi2706/pacman-show:latest --env "MP_MESSAGING_CONNECTOR_SMALLRYE_KAFKA_BOOTSTRAP_SERVERS=my-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092"
+
+kn service create pacman-agregator --image sebi2706/pacman-agregator:v3 --env "QUARKUS_KAFKA_STREAMS_BOOTSTRAP_SERVERS=my-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092
+
+kn service list
+```
+
+
 # pacman-show project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
